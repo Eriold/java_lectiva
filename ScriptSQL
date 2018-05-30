@@ -1,1 +1,356 @@
-Script de la BD del proyecto
+-- phpMyAdmin SQL Dump
+-- version 4.7.9
+-- https://www.phpmyadmin.net/
+--
+-- Servidor: 127.0.0.1
+-- Tiempo de generación: 30-05-2018 a las 06:23:14
+-- Versión del servidor: 10.1.31-MariaDB
+-- Versión de PHP: 7.2.3
+
+SET SQL_MODE = "NO_AUTO_VALUE_ON_ZERO";
+SET AUTOCOMMIT = 0;
+START TRANSACTION;
+SET time_zone = "+00:00";
+
+
+/*!40101 SET @OLD_CHARACTER_SET_CLIENT=@@CHARACTER_SET_CLIENT */;
+/*!40101 SET @OLD_CHARACTER_SET_RESULTS=@@CHARACTER_SET_RESULTS */;
+/*!40101 SET @OLD_COLLATION_CONNECTION=@@COLLATION_CONNECTION */;
+/*!40101 SET NAMES utf8mb4 */;
+
+--
+-- Base de datos: `emisoras`
+--
+
+-- --------------------------------------------------------
+
+--
+-- Estructura de tabla para la tabla `administrador`
+--
+
+CREATE TABLE `administrador` (
+  `CODIGO` bigint(20) NOT NULL,
+  `NOMBRE` varchar(30) NOT NULL,
+  `APELLIDO` varchar(30) NOT NULL,
+  `PASSWORD` varchar(30) NOT NULL,
+  `USERDOCU` bigint(20) DEFAULT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=latin1;
+
+-- --------------------------------------------------------
+
+--
+-- Estructura de tabla para la tabla `agregar`
+--
+
+CREATE TABLE `agregar` (
+  `DOCUSUARIO` bigint(20) DEFAULT NULL,
+  `IDESTADO` bigint(20) NOT NULL,
+  `NUMCANCION` bigint(20) NOT NULL,
+  `FECHA` varchar(10) DEFAULT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=latin1;
+
+-- --------------------------------------------------------
+
+--
+-- Estructura de tabla para la tabla `cancion`
+--
+
+CREATE TABLE `cancion` (
+  `NUMERO` bigint(20) NOT NULL,
+  `ARTISTA` varchar(30) NOT NULL,
+  `NOMBRE` varchar(30) NOT NULL,
+  `YEAR` varchar(10) NOT NULL,
+  `DIRECCIONURL` varchar(250) DEFAULT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=latin1;
+
+-- --------------------------------------------------------
+
+--
+-- Estructura de tabla para la tabla `cancionreproduccion`
+--
+
+CREATE TABLE `cancionreproduccion` (
+  `IDESTADO` bigint(20) NOT NULL,
+  `NUMCANCION` bigint(20) NOT NULL,
+  `NUMREPRODUCCIONES` int(11) DEFAULT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=latin1;
+
+-- --------------------------------------------------------
+
+--
+-- Estructura de tabla para la tabla `creditos`
+--
+
+CREATE TABLE `creditos` (
+  `NOMBRE` varchar(30) NOT NULL,
+  `APELLIDO` varchar(30) NOT NULL,
+  `MATERIA` varchar(30) DEFAULT NULL,
+  `GRUPO` varchar(30) DEFAULT NULL,
+  `DOCUMENTO` bigint(20) DEFAULT NULL,
+  `ID` bigint(20) NOT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=latin1;
+
+--
+-- Volcado de datos para la tabla `creditos`
+--
+
+INSERT INTO `creditos` (`NOMBRE`, `APELLIDO`, `MATERIA`, `GRUPO`, `DOCUMENTO`, `ID`) VALUES
+('Daniel', 'Montoya', 'Lectiva Java', 'Miercoles 10-12', 1048018001, 1);
+
+-- --------------------------------------------------------
+
+--
+-- Estructura de tabla para la tabla `emisora`
+--
+
+CREATE TABLE `emisora` (
+  `NOMBRE` varchar(30) NOT NULL,
+  `ZONA` varchar(30) NOT NULL,
+  `NIT` bigint(20) NOT NULL,
+  `CODIADMIN` bigint(20) DEFAULT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=latin1;
+
+-- --------------------------------------------------------
+
+--
+-- Estructura de tabla para la tabla `emociones`
+--
+
+CREATE TABLE `emociones` (
+  `ID` bigint(20) NOT NULL,
+  `NOMBRE` varchar(30) DEFAULT NULL,
+  `CODIADMIN` bigint(20) DEFAULT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=latin1;
+
+-- --------------------------------------------------------
+
+--
+-- Estructura de tabla para la tabla `favoritos`
+--
+
+CREATE TABLE `favoritos` (
+  `PUNTAJE` bigint(20) DEFAULT NULL,
+  `IDESTADO` bigint(20) DEFAULT NULL,
+  `NUMCANCION` bigint(20) DEFAULT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=latin1;
+
+-- --------------------------------------------------------
+
+--
+-- Estructura de tabla para la tabla `hecho`
+--
+
+CREATE TABLE `hecho` (
+  `YEAR` varchar(10) DEFAULT NULL,
+  `IDCREDITO` bigint(20) DEFAULT NULL,
+  `NITEMISORA` bigint(20) DEFAULT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=latin1;
+
+-- --------------------------------------------------------
+
+--
+-- Estructura de tabla para la tabla `telemisora`
+--
+
+CREATE TABLE `telemisora` (
+  `TELEFONO` varchar(20) DEFAULT NULL,
+  `NITEMISORA` bigint(20) DEFAULT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=latin1;
+
+-- --------------------------------------------------------
+
+--
+-- Estructura de tabla para la tabla `tipodocumento`
+--
+
+CREATE TABLE `tipodocumento` (
+  `TIPODOCU` varchar(20) DEFAULT NULL,
+  `DOCUSUARIO` bigint(20) DEFAULT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=latin1;
+
+--
+-- Volcado de datos para la tabla `tipodocumento`
+--
+
+INSERT INTO `tipodocumento` (`TIPODOCU`, `DOCUSUARIO`) VALUES
+('CC', NULL),
+('CC', NULL);
+
+-- --------------------------------------------------------
+
+--
+-- Estructura de tabla para la tabla `usuarios`
+--
+
+CREATE TABLE `usuarios` (
+  `NOMBRE` varchar(30) NOT NULL,
+  `NOMBRE2` varchar(30) DEFAULT NULL,
+  `APELLIDO` varchar(30) NOT NULL,
+  `APELLIDO2` varchar(30) DEFAULT NULL,
+  `CORREO` varchar(50) NOT NULL,
+  `PASSWORD` varchar(30) NOT NULL,
+  `EDAD` varchar(10) NOT NULL,
+  `DOCUMENTO` bigint(20) NOT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=latin1;
+
+--
+-- Volcado de datos para la tabla `usuarios`
+--
+
+INSERT INTO `usuarios` (`NOMBRE`, `NOMBRE2`, `APELLIDO`, `APELLIDO2`, `CORREO`, `PASSWORD`, `EDAD`, `DOCUMENTO`) VALUES
+('Dani', 'Monto', 'Sanche', 'as', 'daca@gma.com', '111', '11/4/2018', 10101),
+('Camilo', 'Paro', 'Perico', 'Adraz', 'camiperico@gmail.com', '1010', '14/4/2016', 101310),
+('asad', 'asda', 'asdad', 'asdas', 'dari@mori.com', '110', '17/4/2001', 801283),
+('Daniel', 'Camilo', 'Montoya', 'Sánchez', 'daniel2camilo@gmail.com', '101010', '25/08/1992', 1048018001);
+
+--
+-- Índices para tablas volcadas
+--
+
+--
+-- Indices de la tabla `administrador`
+--
+ALTER TABLE `administrador`
+  ADD PRIMARY KEY (`CODIGO`),
+  ADD KEY `USERDOCU` (`USERDOCU`);
+
+--
+-- Indices de la tabla `agregar`
+--
+ALTER TABLE `agregar`
+  ADD PRIMARY KEY (`IDESTADO`,`NUMCANCION`),
+  ADD KEY `NUMCANCION` (`NUMCANCION`),
+  ADD KEY `DOCUSUARIO` (`DOCUSUARIO`);
+
+--
+-- Indices de la tabla `cancion`
+--
+ALTER TABLE `cancion`
+  ADD PRIMARY KEY (`NUMERO`);
+
+--
+-- Indices de la tabla `cancionreproduccion`
+--
+ALTER TABLE `cancionreproduccion`
+  ADD PRIMARY KEY (`IDESTADO`,`NUMCANCION`),
+  ADD KEY `NUMCANCION` (`NUMCANCION`);
+
+--
+-- Indices de la tabla `creditos`
+--
+ALTER TABLE `creditos`
+  ADD PRIMARY KEY (`ID`);
+
+--
+-- Indices de la tabla `emisora`
+--
+ALTER TABLE `emisora`
+  ADD PRIMARY KEY (`NIT`),
+  ADD KEY `CODIADMIN` (`CODIADMIN`);
+
+--
+-- Indices de la tabla `emociones`
+--
+ALTER TABLE `emociones`
+  ADD PRIMARY KEY (`ID`),
+  ADD KEY `CODIADMIN` (`CODIADMIN`);
+
+--
+-- Indices de la tabla `favoritos`
+--
+ALTER TABLE `favoritos`
+  ADD KEY `IDESTADO` (`IDESTADO`),
+  ADD KEY `NUMCANCION` (`NUMCANCION`);
+
+--
+-- Indices de la tabla `hecho`
+--
+ALTER TABLE `hecho`
+  ADD KEY `IDCREDITO` (`IDCREDITO`),
+  ADD KEY `NITEMISORA` (`NITEMISORA`);
+
+--
+-- Indices de la tabla `telemisora`
+--
+ALTER TABLE `telemisora`
+  ADD KEY `NITEMISORA` (`NITEMISORA`);
+
+--
+-- Indices de la tabla `tipodocumento`
+--
+ALTER TABLE `tipodocumento`
+  ADD KEY `DOCUSUARIO` (`DOCUSUARIO`);
+
+--
+-- Indices de la tabla `usuarios`
+--
+ALTER TABLE `usuarios`
+  ADD PRIMARY KEY (`DOCUMENTO`);
+
+--
+-- Restricciones para tablas volcadas
+--
+
+--
+-- Filtros para la tabla `administrador`
+--
+ALTER TABLE `administrador`
+  ADD CONSTRAINT `administrador_ibfk_1` FOREIGN KEY (`USERDOCU`) REFERENCES `usuarios` (`DOCUMENTO`);
+
+--
+-- Filtros para la tabla `agregar`
+--
+ALTER TABLE `agregar`
+  ADD CONSTRAINT `agregar_ibfk_1` FOREIGN KEY (`IDESTADO`) REFERENCES `emociones` (`ID`),
+  ADD CONSTRAINT `agregar_ibfk_2` FOREIGN KEY (`NUMCANCION`) REFERENCES `cancion` (`NUMERO`),
+  ADD CONSTRAINT `agregar_ibfk_3` FOREIGN KEY (`DOCUSUARIO`) REFERENCES `usuarios` (`DOCUMENTO`);
+
+--
+-- Filtros para la tabla `cancionreproduccion`
+--
+ALTER TABLE `cancionreproduccion`
+  ADD CONSTRAINT `cancionreproduccion_ibfk_1` FOREIGN KEY (`IDESTADO`) REFERENCES `emociones` (`ID`),
+  ADD CONSTRAINT `cancionreproduccion_ibfk_2` FOREIGN KEY (`NUMCANCION`) REFERENCES `cancion` (`NUMERO`);
+
+--
+-- Filtros para la tabla `emisora`
+--
+ALTER TABLE `emisora`
+  ADD CONSTRAINT `emisora_ibfk_1` FOREIGN KEY (`CODIADMIN`) REFERENCES `administrador` (`CODIGO`);
+
+--
+-- Filtros para la tabla `emociones`
+--
+ALTER TABLE `emociones`
+  ADD CONSTRAINT `emociones_ibfk_1` FOREIGN KEY (`CODIADMIN`) REFERENCES `administrador` (`CODIGO`);
+
+--
+-- Filtros para la tabla `favoritos`
+--
+ALTER TABLE `favoritos`
+  ADD CONSTRAINT `favoritos_ibfk_1` FOREIGN KEY (`IDESTADO`) REFERENCES `emociones` (`ID`),
+  ADD CONSTRAINT `favoritos_ibfk_2` FOREIGN KEY (`NUMCANCION`) REFERENCES `cancion` (`NUMERO`);
+
+--
+-- Filtros para la tabla `hecho`
+--
+ALTER TABLE `hecho`
+  ADD CONSTRAINT `hecho_ibfk_1` FOREIGN KEY (`IDCREDITO`) REFERENCES `creditos` (`ID`),
+  ADD CONSTRAINT `hecho_ibfk_2` FOREIGN KEY (`NITEMISORA`) REFERENCES `emisora` (`NIT`);
+
+--
+-- Filtros para la tabla `telemisora`
+--
+ALTER TABLE `telemisora`
+  ADD CONSTRAINT `telemisora_ibfk_1` FOREIGN KEY (`NITEMISORA`) REFERENCES `emisora` (`NIT`);
+
+--
+-- Filtros para la tabla `tipodocumento`
+--
+ALTER TABLE `tipodocumento`
+  ADD CONSTRAINT `tipodocumento_ibfk_1` FOREIGN KEY (`DOCUSUARIO`) REFERENCES `usuarios` (`DOCUMENTO`);
+COMMIT;
+
+/*!40101 SET CHARACTER_SET_CLIENT=@OLD_CHARACTER_SET_CLIENT */;
+/*!40101 SET CHARACTER_SET_RESULTS=@OLD_CHARACTER_SET_RESULTS */;
+/*!40101 SET COLLATION_CONNECTION=@OLD_COLLATION_CONNECTION */;
