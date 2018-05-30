@@ -83,7 +83,6 @@ public class Reproductor extends javax.swing.JFrame implements ActionListener{
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
     private void initComponents() {
 
-        jLabel5 = new javax.swing.JLabel();
         jPanel1 = new javax.swing.JPanel();
         jPanel2 = new javax.swing.JPanel();
         jLabel1 = new javax.swing.JLabel();
@@ -104,8 +103,6 @@ public class Reproductor extends javax.swing.JFrame implements ActionListener{
         lblEstado = new javax.swing.JLabel();
         lblActualTiempo = new javax.swing.JLabel();
         lblTotalTiempo = new javax.swing.JLabel();
-
-        jLabel5.setText("jLabel5");
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
         setTitle("Reproductor");
@@ -481,12 +478,12 @@ public class Reproductor extends javax.swing.JFrame implements ActionListener{
     }//GEN-LAST:event_lblBotonPararMouseClicked
 
     private void lblBotonEdtarUsuarioMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_lblBotonEdtarUsuarioMouseClicked
-        EditarUsuario abrir =new EditarUsuario();
+        RegistroUsuario abrir =new RegistroUsuario();
         abrir.setVisible(true);
     }//GEN-LAST:event_lblBotonEdtarUsuarioMouseClicked
 
     private void lblBtonBuscarMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_lblBtonBuscarMouseClicked
-        Buscar abrir = new Buscar();
+        BuscarUsuario abrir = new BuscarUsuario();
         abrir.setVisible(true);
     }//GEN-LAST:event_lblBtonBuscarMouseClicked
 
@@ -524,7 +521,6 @@ public class Reproductor extends javax.swing.JFrame implements ActionListener{
     
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JLabel jLabel1;
-    private javax.swing.JLabel jLabel5;
     private javax.swing.JPanel jPanel1;
     private javax.swing.JPanel jPanel2;
     private javax.swing.JPanel jPanel3;

@@ -5,7 +5,9 @@
  */
 package emisora.vista;
 
-import emisora.file.*;
+import emisora.Persistencia.UsuarioDAO;
+import emisora.Entidades.UsuarioEn;
+import emisora.Negocio.UsuarioNg;
 import java.text.SimpleDateFormat;
 import javax.swing.JOptionPane;
 
@@ -13,12 +15,12 @@ import javax.swing.JOptionPane;
  *
  * @author Dacamoty
  */
-public class Buscar extends javax.swing.JFrame {
+public class BuscarUsuario extends javax.swing.JFrame {
 
     /**
      * Creates new form Editar
      */
-    public Buscar() {
+    public BuscarUsuario() {
         initComponents();
     }
 
@@ -237,19 +239,26 @@ public class Buscar extends javax.swing.JFrame {
     }//GEN-LAST:event_txtDocumentoKeyTyped
     //Método para buscar los datos del registrado, a partir del correo y contraseña
     private void btnBuscarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnBuscarActionPerformed
-        FileDAO file =new FileDAO();
-        EditarGuardar edita= file.buscarRegistro(txtCorreo.getText(), passPass.getText());
-        SimpleDateFormat fecha =  new SimpleDateFormat("yyyy/MM/dd");
-        if(edita!=null){
-            txtNombre.setText(edita.getNombre());
-            txtNombre2.setText(edita.getNombre2());
-            txtApellido.setText(edita.getApellido());
-            txtApellido2.setText(edita.getApellido2());
-            txtTipoDocu.setText(edita.getTipoDocu());
-            txtDocumento.setText(edita.getDocumento());
-            txtFecha.setText(fecha.format(edita.getFecha()));            
-            //edita.setNacimiento(jdcCalendar.getCalendar().toString());
+        int cod=-1;
+        UsuarioEn user = null;
+        UsuarioNg userNg = new UsuarioNg();
+        if(txtDocumento.getText().trim().length()>0){
+         cod=Integer.parseInt(txtDocumento.getText());
+        }else{
+            JOptionPane.showConfirmDialog(rootPane,"Ingrese el código" );
         }
+        user=userNg.buscarPropietario(cod);
+        if(user!=null){
+            txtNombre.setText(user.getNombre());
+            txtApellido.setText(user.getApellido());
+            txtCorreo.setText(user.getCorreo());
+            
+            txtDocumento.setEditable(false);
+            //btnActualizar.setEnabled(true);
+            //btnGuardar.setEnabled(false);            
+            
+        }
+        
     }//GEN-LAST:event_btnBuscarActionPerformed
 
     /**
@@ -269,20 +278,20 @@ public class Buscar extends javax.swing.JFrame {
                 }
             }
         } catch (ClassNotFoundException ex) {
-            java.util.logging.Logger.getLogger(EditarUsuario.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+            java.util.logging.Logger.getLogger(RegistroUsuario.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
         } catch (InstantiationException ex) {
-            java.util.logging.Logger.getLogger(EditarUsuario.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+            java.util.logging.Logger.getLogger(RegistroUsuario.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
         } catch (IllegalAccessException ex) {
-            java.util.logging.Logger.getLogger(EditarUsuario.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+            java.util.logging.Logger.getLogger(RegistroUsuario.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
         } catch (javax.swing.UnsupportedLookAndFeelException ex) {
-            java.util.logging.Logger.getLogger(EditarUsuario.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+            java.util.logging.Logger.getLogger(RegistroUsuario.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
         }
         //</editor-fold>
 
         /* Create and display the form */
         java.awt.EventQueue.invokeLater(new Runnable() {
             public void run() {
-                new EditarUsuario().setVisible(true);
+                new RegistroUsuario().setVisible(true);
             }
         });
     }
